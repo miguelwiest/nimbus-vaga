@@ -71,18 +71,18 @@ const LeftBar: React.FC = () => {
     }
 
     const handleSave = () => {
-        const newPoint:IPoint = {
+        const newPoint: IPoint = {
             description: localDescription,
             lat: localLat,
             lng: localLng
         }
-        const newArea:IArea = {
+        const newArea: IArea = {
             description: localDescription,
             lat: localLat,
             lng: localLng,
             radius: localRadius
         }
-        const newPerimeter:IPerimeter = {
+        const newPerimeter: IPerimeter = {
             description: localDescription,
             initial: {
                 lat: localLat,
@@ -182,91 +182,94 @@ const LeftBar: React.FC = () => {
     return (
         <section className="top__bar">
             <h1>{titleTypes()}</h1>
-            <div className="top__bar__container">
-                {settings.type !== SettingsActionTypes.INITIALIZE &&
-                    <div className="input__container">
-                        <label htmlFor="description">descrição: </label>
-                        <input
-                            type="text"
-                            name="description"
-                            id="description"
-                            value={localDescription}
-                            onChange={(event) => setLocaDescription(event.target.value)}
-                        />
-                    </div>
-                }
-                <div className="input__container">
-                    <label
-                        htmlFor="latitude">Latitude {(settings.type === SettingsActionTypes.NEW_PERIMETER || settings.type === SettingsActionTypes.EDIT_PERIMETER) && 'Superior'}: </label>
-                    <input
-                        type="number"
-                        name="latitude"
-                        id="latitude"
-                        value={localLat}
-                        onChange={(event) => setLocalLat(Number(event.target.value))}
-                    />
-                </div>
-                <div className="input__container">
-                    <label
-                        htmlFor="longitude">Longitude {(settings.type === SettingsActionTypes.NEW_PERIMETER || settings.type === SettingsActionTypes.EDIT_PERIMETER) && 'Superior'}: </label>
-                    <input
-                        type="number"
-                        name="longitude"
-                        id="longitude"
-                        value={localLng}
-                        onChange={(event) => setLocalLng(Number(event.target.value))}
-                    />
-                </div>
-
-                {(settings.type === SettingsActionTypes.NEW_PERIMETER || settings.type === SettingsActionTypes.EDIT_PERIMETER) &&
-                    <>
+            <div style={{display: "flex", alignItems: "center"}}>
+                <div>
+                    <div className="top__bar__container">
+                        {settings.type !== SettingsActionTypes.INITIALIZE &&
+                            <div className="input__container">
+                                <label htmlFor="description">descrição: </label>
+                                <input
+                                    type="text"
+                                    name="description"
+                                    id="description"
+                                    value={localDescription}
+                                    onChange={(event) => setLocaDescription(event.target.value)}
+                                />
+                            </div>
+                        }
                         <div className="input__container">
-                            <label htmlFor="latitude">Latitude Inferior: </label>
+                            <label
+                                htmlFor="latitude">Latitude {(settings.type === SettingsActionTypes.NEW_PERIMETER || settings.type === SettingsActionTypes.EDIT_PERIMETER) && 'Superior'}: </label>
                             <input
                                 type="number"
                                 name="latitude"
                                 id="latitude"
-                                value={localFinalLat}
-                                onChange={(event) => setLocalFinalLat(Number(event.target.value))}
+                                value={localLat}
+                                onChange={(event) => setLocalLat(Number(event.target.value))}
                             />
                         </div>
                         <div className="input__container">
-                            <label htmlFor="longitude">Longitude Inferior: </label>
+                            <label
+                                htmlFor="longitude">Longitude {(settings.type === SettingsActionTypes.NEW_PERIMETER || settings.type === SettingsActionTypes.EDIT_PERIMETER) && 'Superior'}: </label>
                             <input
                                 type="number"
                                 name="longitude"
                                 id="longitude"
-                                value={localFinalLng}
-                                onChange={(event) => setLocalFinalLng(Number(event.target.value))}
+                                value={localLng}
+                                onChange={(event) => setLocalLng(Number(event.target.value))}
                             />
                         </div>
-                    </>
-                }
 
-                {(settings.type === SettingsActionTypes.NEW_AREA || settings.type === SettingsActionTypes.EDIT_AREA) &&
-                    <div className="input__container">
-                        <label htmlFor="radius">Raio (km): </label>
-                        <input
-                            type="number"
-                            name="radius"
-                            id="radius"
-                            value={localRadius}
-                            onChange={(event) => setLocalRadius(Number(event.target.value))}
-                        />
+                        {(settings.type === SettingsActionTypes.NEW_AREA || settings.type === SettingsActionTypes.EDIT_AREA) &&
+                            <div className="input__container">
+                                <label htmlFor="radius">Raio (km): </label>
+                                <input
+                                    type="number"
+                                    name="radius"
+                                    id="radius"
+                                    value={localRadius}
+                                    onChange={(event) => setLocalRadius(Number(event.target.value))}
+                                />
+                            </div>
+                        }
+                        {settings.type === SettingsActionTypes.INITIALIZE &&
+                            <div className="input__container">
+                                <label htmlFor="zoom">Zoom: </label>
+                                <input
+                                    type="number"
+                                    name="zoom"
+                                    id="zoom"
+                                    value={localZoom}
+                                    onChange={(event) => setLocalZoom(Number(event.target.value))}
+                                />
+                            </div>
+                        }
                     </div>
-                }
-                {settings.type === SettingsActionTypes.INITIALIZE &&
-                    <div className="input__container">
-                        <label htmlFor="zoom">Zoom: </label>
-                        <input
-                            type="number"
-                            name="zoom"
-                            id="zoom"
-                            value={localZoom}
-                            onChange={(event) => setLocalZoom(Number(event.target.value))}
-                        />
-                    </div>
-                }
+                    {(settings.type === SettingsActionTypes.NEW_PERIMETER || settings.type === SettingsActionTypes.EDIT_PERIMETER) &&
+                        <div className="top__bar__container">
+                            <div className="input__container">
+                                <label htmlFor="latitude">Latitude Inferior: </label>
+                                <input
+                                    type="number"
+                                    name="latitude"
+                                    id="latitude"
+                                    value={localFinalLat}
+                                    onChange={(event) => setLocalFinalLat(Number(event.target.value))}
+                                />
+                            </div>
+                            <div className="input__container">
+                                <label htmlFor="longitude">Longitude Inferior: </label>
+                                <input
+                                    type="number"
+                                    name="longitude"
+                                    id="longitude"
+                                    value={localFinalLng}
+                                    onChange={(event) => setLocalFinalLng(Number(event.target.value))}
+                                />
+                            </div>
+                        </div>
+                    }
+                </div>
                 <button onClick={handleSave}>
                     Salvar
                 </button>
