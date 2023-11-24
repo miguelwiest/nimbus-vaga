@@ -8,6 +8,8 @@ import {setPoints} from "../../store/modules/points/actions";
 import {setPerimeters} from "../../store/modules/perimeters/actions";
 import {setAreas} from "../../store/modules/areas/actions";
 import {IArea, IPerimeter, IPoint} from "../../shared/types";
+import TrashIcon from "../../assets/trash-2.svg";
+import {deleteArea, deletePerimeter, deletePoint} from "../../shared/services";
 
 const LeftBar: React.FC = () => {
     const dispatch = useDispatch()
@@ -27,9 +29,6 @@ const LeftBar: React.FC = () => {
                             if (settings.type === SettingsActionTypes.VIEW_IN_MAP) {
                                 dispatch(setType(SettingsActionTypes.INITIALIZE))
                             } else {
-                                dispatch(setPoint(null))
-                                dispatch(setArea(null))
-                                dispatch(setPerimeter(null))
                                 dispatch(setType(SettingsActionTypes.VIEW_IN_MAP))
                             }
                         }}
@@ -88,7 +87,20 @@ const LeftBar: React.FC = () => {
                                     dispatch(setType(SettingsActionTypes.EDIT_POINT))
                                 }}
                             >
-                                {point.description}
+                                <strong>
+                                    {point.description}
+                                </strong>
+                                <img
+                                    src={TrashIcon}
+                                    alt="TrashIcon"
+                                    onClick={() => {
+                                        const newPoints = points.filter((pointItem: IPoint) => pointItem.id !== point.id)
+                                        deletePoint(point.id as string).then(() => {
+                                            dispatch(setType(SettingsActionTypes.INITIALIZE))
+                                            dispatch(setPoints(newPoints))
+                                        })
+                                    }}
+                                />
                             </button>
                         </li>
                     ))}
@@ -126,7 +138,20 @@ const LeftBar: React.FC = () => {
                                     dispatch(setType(SettingsActionTypes.EDIT_AREA))
                                 }}
                             >
-                                {area.description}
+                                <strong>
+                                    {area.description}
+                                </strong>
+                                <img
+                                    src={TrashIcon}
+                                    alt="TrashIcon"
+                                    onClick={() => {
+                                        const newAreas = areas.filter((areaItem: IArea) => areaItem.id !== area.id)
+                                        deleteArea(area.id as string).then(() => {
+                                            dispatch(setType(SettingsActionTypes.INITIALIZE))
+                                            dispatch(setAreas(newAreas))
+                                        })
+                                    }}
+                                />
                             </button>
                         </li>
                     ))}
@@ -140,7 +165,7 @@ const LeftBar: React.FC = () => {
                     Perímetros {settings.type !== SettingsActionTypes.VIEW_IN_MAP && '+'}
                 </button>
                 <ul>
-                    {/*{perimeters.map((perimeter: IPerimeter) => (
+                    {perimeters.map((perimeter: IPerimeter) => (
                         <li key={perimeter.id}>
                             <button
                                 className={`button__control ${perimeter.id === settings.perimeter.id || (settings.type === SettingsActionTypes.VIEW_IN_MAP && perimeter.viewMap) ? 'active' : ''}`}
@@ -163,10 +188,24 @@ const LeftBar: React.FC = () => {
                                     dispatch(setType(SettingsActionTypes.EDIT_PERIMETER))
                                 }}
                             >
-                                {perimeter.description}
+                                <strong>
+                                    {perimeter.description}
+                                </strong>
+
+                                <img
+                                    src={TrashIcon}
+                                    alt="TrashIcon"
+                                    onClick={() => {
+                                        const newPerimeters = perimeters.filter((perimeterItem: IPerimeter) => perimeterItem.id !== perimeter.id)
+                                        deletePerimeter(perimeter.id as string).then(() => {
+                                            dispatch(setType(SettingsActionTypes.INITIALIZE))
+                                            dispatch(setPerimeters(newPerimeters))
+                                        })
+                                    }}
+                                />
                             </button>
                         </li>
-                    ))}*/}
+                    ))}
                 </ul>
             </div>
         </section>

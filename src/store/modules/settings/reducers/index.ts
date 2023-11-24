@@ -98,7 +98,8 @@ export const settings = (state = initialState, action: any) => {
                 action.payload === SettingsActionTypes.INITIALIZE ||
                 action.payload === SettingsActionTypes.NEW_POINT ||
                 action.payload === SettingsActionTypes.NEW_AREA ||
-                action.payload === SettingsActionTypes.NEW_PERIMETER
+                action.payload === SettingsActionTypes.NEW_PERIMETER ||
+                action.payload === SettingsActionTypes.VIEW_IN_MAP
             ) {
                 return {
                     ...state,

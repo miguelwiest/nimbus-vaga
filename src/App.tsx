@@ -25,6 +25,8 @@ const App = () => {
         })
     }, [dispatch])
 
+
+
     return (
         <main id="main">
             { settings.type !== SettingsActionTypes.VIEW_IN_MAP && <TopBar/>}
