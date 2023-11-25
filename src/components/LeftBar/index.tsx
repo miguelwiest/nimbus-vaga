@@ -90,17 +90,21 @@ const LeftBar: React.FC = () => {
                                 <strong>
                                     {point.description}
                                 </strong>
-                                <img
-                                    src={TrashIcon}
-                                    alt="TrashIcon"
-                                    onClick={() => {
-                                        const newPoints = points.filter((pointItem: IPoint) => pointItem.id !== point.id)
-                                        deletePoint(point.id as string).then(() => {
-                                            dispatch(setType(SettingsActionTypes.INITIALIZE))
-                                            dispatch(setPoints(newPoints))
-                                        })
-                                    }}
-                                />
+                                {
+                                    settings.type !== SettingsActionTypes.VIEW_IN_MAP &&
+                                    <img
+                                        src={TrashIcon}
+                                        alt="TrashIcon"
+                                        onClick={() => {
+                                            const newPoints = points.filter((pointItem: IPoint) => pointItem.id !== point.id)
+                                            deletePoint(point.id as string).then(() => {
+                                                dispatch(setType(SettingsActionTypes.INITIALIZE))
+                                                dispatch(setPoints(newPoints))
+                                            })
+                                        }}
+                                    />
+                                }
+
                             </button>
                         </li>
                     ))}
@@ -141,17 +145,21 @@ const LeftBar: React.FC = () => {
                                 <strong>
                                     {area.description}
                                 </strong>
-                                <img
-                                    src={TrashIcon}
-                                    alt="TrashIcon"
-                                    onClick={() => {
-                                        const newAreas = areas.filter((areaItem: IArea) => areaItem.id !== area.id)
-                                        deleteArea(area.id as string).then(() => {
-                                            dispatch(setType(SettingsActionTypes.INITIALIZE))
-                                            dispatch(setAreas(newAreas))
-                                        })
-                                    }}
-                                />
+                                {
+                                    settings.type !== SettingsActionTypes.VIEW_IN_MAP &&
+                                    <img
+                                        src={TrashIcon}
+                                        alt="TrashIcon"
+                                        onClick={() => {
+                                            const newAreas = areas.filter((areaItem: IArea) => areaItem.id !== area.id)
+                                            deleteArea(area.id as string).then(() => {
+                                                dispatch(setType(SettingsActionTypes.INITIALIZE))
+                                                dispatch(setAreas(newAreas))
+                                            })
+                                        }}
+                                    />
+                                }
+
                             </button>
                         </li>
                     ))}
@@ -192,17 +200,20 @@ const LeftBar: React.FC = () => {
                                     {perimeter.description}
                                 </strong>
 
-                                <img
-                                    src={TrashIcon}
-                                    alt="TrashIcon"
-                                    onClick={() => {
-                                        const newPerimeters = perimeters.filter((perimeterItem: IPerimeter) => perimeterItem.id !== perimeter.id)
-                                        deletePerimeter(perimeter.id as string).then(() => {
-                                            dispatch(setType(SettingsActionTypes.INITIALIZE))
-                                            dispatch(setPerimeters(newPerimeters))
-                                        })
-                                    }}
-                                />
+                                {
+                                    settings.type !== SettingsActionTypes.VIEW_IN_MAP &&
+                                    <img
+                                        src={TrashIcon}
+                                        alt="TrashIcon"
+                                        onClick={() => {
+                                            const newPerimeters = perimeters.filter((perimeterItem: IPerimeter) => perimeterItem.id !== perimeter.id)
+                                            deletePerimeter(perimeter.id as string).then(() => {
+                                                dispatch(setType(SettingsActionTypes.INITIALIZE))
+                                                dispatch(setPerimeters(newPerimeters))
+                                            })
+                                        }}
+                                    />
+                                }
                             </button>
                         </li>
                     ))}
